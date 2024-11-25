@@ -4,8 +4,8 @@
       Bienvenido
     </div>
     <div class="hidden md:flex space-x-4">
-      <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Registros</a>
-      <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Colaboradores</a>
+      <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" routerLink="records">Registros</a>
+      <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" routerLink="collaborators">Colaboradores</a>
     </div>
     <div class="md:hidden">
       <button id="menu-button" class="text-gray-300 hover:text-white focus:outline-none">
@@ -16,8 +16,8 @@
     </div>
   </div>
   <div id="mobile-menu" class="hidden md:hidden">
-    <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">Registros</a>
-    <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium">Colaboradores</a>
+    <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium" routerLink="records">Registros</a>
+    <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium" routerLink="collaborators">Colaboradores</a>
   </div>
 </nav>
 <router-outlet></router-outlet>
