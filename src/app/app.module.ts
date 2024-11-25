@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecordsComponent } from './records/records.component';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
+import { CollaboratorDetailComponent } from './collaborator-detail/collaborator-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecordsComponent,
-    CollaboratorsComponent
+    CollaboratorsComponent,
+    CollaboratorDetailComponent
   ],
   imports: [
     BrowserModule,
