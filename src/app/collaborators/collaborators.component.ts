@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-collaborators',
@@ -7,4 +8,19 @@ import { Component } from '@angular/core';
 })
 export class CollaboratorsComponent {
 
+  constructor(private router: Router) { }
+
+  editCollaborator(collaboratorId: string) {
+    this.router.navigate(['/collaborators', collaboratorId]);
+  }
+
+  openModal() {
+    const modal = document.getElementById('modal');
+    modal?.classList.remove('hidden');
+  }
+
+  closeModal() {
+    const modal = document.getElementById('modal');
+    modal?.classList.add('hidden');
+  }
 }

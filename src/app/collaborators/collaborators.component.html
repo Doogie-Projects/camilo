@@ -1,16 +1,103 @@
 <div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-6">
-    <div class="px-6 py-4">
-        <div class="font-bold text-xl mb-2">Nombre del Colaborador</div>
-        <p class="text-gray-700 text-base">
-            <strong>Cédula:</strong> 123456789
-        </p>
-        <p class="text-gray-700 text-base">
-            <strong>Contraseña:</strong> ********
-        </p>
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2">Colaborador 1 (nombre)</div>
+    <p class="text-gray-700 text-base">
+      <strong>Correo:</strong> colaborador1&#64;gmail.com
+    </p>
+    <p class="text-gray-700 text-base">
+      <strong>Contraseña:</strong> ********
+    </p>
+  </div>
+  <div class="px-6 py-4 flex justify-end">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      (click)="editCollaborator('colaborador2')">
+      Editar
+    </button>
+  </div>
+
+  <!-- Button + -->
+  <button
+    class="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg focus:outline-none focus:shadow-outline"
+    (click)="openModal()">
+    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+    </svg>
+  </button>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
+    <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+      <h2 class="text-xl font-bold mb-4">Agregar Colaborador</h2>
+      <form>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="new-name">
+            Nombre
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="new-name" type="text" placeholder="Nombre del Colaborador">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="new-lastname">
+            Apellido
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="new-lastname" type="text" placeholder="Apellido del Colaborador">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="new-id">
+            ID
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="new-id" type="text" placeholder="ID del Colaborador">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="new-email">
+            Correo
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="new-email" type="email" placeholder="colaborador1&#64;gmail.com">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="new-phone">
+            Teléfono
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="new-phone" type="text" placeholder="Teléfono del Colaborador">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="new-ssid">
+            SSID
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="new-ssid" type="text" placeholder="SSID del Colaborador">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="new-password">
+            Contraseña
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="new-password" type="password" placeholder="********">
+        </div>
+        <div class="flex justify-end">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button" (click)="closeModal()">
+            Guardar
+          </button>
+          <button
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+            type="button" (click)="closeModal()">
+            Cancelar
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="px-6 py-4 flex justify-end">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Editar
-        </button>
-    </div>
+  </div>
 </div>
