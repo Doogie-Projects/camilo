@@ -1,33 +1,3 @@
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
-// import { RecordsComponent } from './records/records.component';
-// import { CollaboratorsComponent } from './collaborators/collaborators.component';
-// import { CollaboratorDetailComponent } from './collaborator-detail/collaborator-detail.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MatTabsModule } from '@angular/material/tabs';
-
-// @NgModule({
-//   declarations: [
-//     AppComponent,
-//     RecordsComponent,
-//     CollaboratorsComponent,
-//     CollaboratorDetailComponent
-//   ],
-//   imports: [
-//     BrowserModule,
-//     AppRoutingModule,
-//     BrowserAnimationsModule,
-//     MatTabsModule,
-//   ],
-//   providers: [],
-//   bootstrap: [AppComponent]
-// })
-// export class AppModule { }
-
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,6 +11,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AppComponent } from './app.component';
 import { RecordsComponent } from './records/records.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -56,7 +27,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
