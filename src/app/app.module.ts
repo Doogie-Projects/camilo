@@ -12,11 +12,16 @@ import { AppComponent } from './app.component';
 import { RecordsComponent } from './records/records.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CollaboratorsComponent } from './collaborators/collaborators.component';
+import { CollaboratorCardComponent } from './collaborator-card/collaborator-card.component';
+import { ApiService } from './service/api.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RecordsComponent
+    RecordsComponent,
+    CollaboratorsComponent,
+    CollaboratorCardComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
