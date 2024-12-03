@@ -15,13 +15,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { CollaboratorsComponent } from './collaborators/collaborators.component';
 import { CollaboratorCardComponent } from './collaborator-card/collaborator-card.component';
 import { ApiService } from './service/api.service';
+import { CollaboratorDetailComponent } from './collaborator-detail/collaborator-detail.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecordsComponent,
     CollaboratorsComponent,
-    CollaboratorCardComponent
+    CollaboratorCardComponent,
+    CollaboratorDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { ApiService } from './service/api.service';
     MatSortModule,
     MatPaginatorModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

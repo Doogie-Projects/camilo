@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +33,25 @@ export class ApiService {
     const headers = new HttpHeaders().set('x-api-key', 'MN70HmszY51RXTqUpXnRz3812ZLfhxtE8N0LPPg4');
     return this.http.put<any>(`${this.url}create`, collaborator, { headers });
   }
+
+  public updateColab(): Observable<any> {
+    const headers = new HttpHeaders().set('x-api-key', 'MN70HmszY51RXTqUpXnRz3812ZLfhxtE8N0LPPg4');
+    
+    return this.http.get<any>(`${this.url}get-all`, { headers }).pipe(
+      tap(data => {
+        // Borrar la información existente de 'collaborators' en localStorage
+        localStorage.removeItem('collaborators');
+        
+        // Guardar los nuevos datos en localStorage
+        localStorage.setItem('collaborators', JSON.stringify(data));
+      })
+    );
+  }
+
+  public deleteCollab(collaboratorId: string): Observable<any> {
+    const headers = new HttpHeaders().set('x-api-key', 'MN70HmszY51RXTqUpXnRz3812ZLfhxtE8N0LPPg4');
+    const email = new HttpParams().set('email', collaboratorId);
+    return this.http.delete<any>(`${this.url}delete/`, { headers, params: email });
+  }
+  
 }

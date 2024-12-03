@@ -11,8 +11,8 @@ export class CollaboratorCardComponent {
 
   constructor(private router: Router) { }
 
-  editCollaborator(collaboratorId: string) {
-    this.router.navigate(['/collaborators', collaboratorId]);
+  editCollaborator(collaboratorEmail: string) {
+    this.router.navigate(['/collaborators', collaboratorEmail]);
   }
 
 }

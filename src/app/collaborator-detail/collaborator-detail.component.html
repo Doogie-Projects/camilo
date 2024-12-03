@@ -1,30 +1,80 @@
-<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden mt-6">
-    <form class="px-6 py-4">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Nombre
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Nombre" value="Colaborador 1">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-          Correo
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Correo" value="colaborador1&#64;gmail.com">
-      </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-          Contraseña
-        </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Contraseña" value="******">
-      </div>
-      <div class="flex justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-          Guardar
-        </button>
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-          Eliminar
-        </button>
-      </div>
-    </form>
-  </div>
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg p-6 overflow-hidden mt-6">
+  <h2 class="text-xl font-bold mb-4">Editar Colaborador</h2>
+  <form class="px-6 py-4">
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="new-name">
+        Nombre
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="new-name" type="text" placeholder="Nombre del Colaborador" [(ngModel)]="collaborator.name" name="name">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="new-lastname">
+        Apellido
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="new-lastname" type="text" placeholder="Apellido del Colaborador" [(ngModel)]="collaborator.lastName"
+        name="lastName">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="new-id">
+        ID
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="new-id" type="text" placeholder="ID del Colaborador" [(ngModel)]="collaborator.employeeID"
+        name="employeeID">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="new-email">
+        Correo
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="new-email" type="email" placeholder="Correo del Colaborador" [(ngModel)]="collaborator.email" name="email">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="new-phone">
+        Teléfono
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="new-phone" type="text" placeholder="Teléfono del Colaborador" [(ngModel)]="collaborator.phone" name="phone">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="new-ssid">
+        SSID
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="new-ssid" type="text" placeholder="SSID del Colaborador" [(ngModel)]="collaborator.ssid" name="ssid">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="new-password">
+        Contraseña
+      </label>
+      <input
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        id="new-password" type="password" placeholder="********" [(ngModel)]="collaborator.password" name="password">
+    </div>
+    <div class="flex justify-end">
+      <button
+        class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        type="button" (click)="deleteCollaborator()">
+        Eliminar
+      </button>
+      <button
+        class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+        type="button" (click)="saveCollaborator()">
+        Guardar
+      </button>
+      <button
+        class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+        type="button" (click)="cancelUpdate()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
