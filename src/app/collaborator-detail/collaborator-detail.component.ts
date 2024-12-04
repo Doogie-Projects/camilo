@@ -11,9 +11,13 @@ import { Location } from '@angular/common';
 export class CollaboratorDetailComponent implements OnInit {
   collaborator: any;
 
-  data: any [] = [];
+  data: any[] = [];
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private location: Location) { }
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private location: Location
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('collaboratorId');
@@ -95,30 +99,11 @@ export class CollaboratorDetailComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating collaborator:', error);
-      });
+      }
+    );
   }
 
   cancelUpdate() {
     this.location.back();
-  }
-
-  deleteCollaborator() {
-    const collaboratorId = this.collaborator.email;
-    this.apiService.deleteCollab(collaboratorId).subscribe(
-      (response) => {
-        console.log('Collaborator deleted:', response);
-        this.apiService.updateColab().subscribe(
-          (updateResponse) => {
-            console.log('Collaborators list updated:', updateResponse);
-            this.cancelUpdate();
-          },
-          (updateError) => {
-            console.error('Error updating collaborators list:', updateError);
-          }
-        );
-      },
-      (error) => {
-        console.error('Error deleting collaborator:', error);
-      });
   }
 }
