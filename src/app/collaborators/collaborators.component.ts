@@ -49,11 +49,22 @@ export class CollaboratorsComponent {
     this.apiService.createCollab(collaborator).subscribe(response => {
       console.log('Collaborator updated:', response);
       this.closeModal();
+      this.clearForm();
     }, error => {
       console.error('Error updating collaborator:', error);
     });
   }
 
+  clearForm() {
+    (document.getElementById('new-email') as HTMLInputElement).value = '';
+    (document.getElementById('new-name') as HTMLInputElement).value = '';
+    (document.getElementById('new-lastname') as HTMLInputElement).value = '';
+    (document.getElementById('new-password') as HTMLInputElement).value = '';
+    (document.getElementById('new-id') as HTMLInputElement).value = '';
+    (document.getElementById('new-phone') as HTMLInputElement).value = '';
+    (document.getElementById('new-ssid') as HTMLInputElement).value = '';
+  }
+  
   ngOnInit() : void{
     this.getAllColab()
   }
