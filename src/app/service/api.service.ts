@@ -36,7 +36,15 @@ export class ApiService {
       'x-api-key',
       'MN70HmszY51RXTqUpXnRz3812ZLfhxtE8N0LPPg4'
     );
-    return this.http.put<any>(`${this.url}create`, collaborator, { headers });
+    return this.http.put<any>(`${this.url}create`, collaborator, { headers }).pipe(
+      tap((data) => {
+        // Remove existing 'collaborators' information from localStorage
+        localStorage.removeItem('collaborators');
+  
+        // Save the new data in localStorage
+        localStorage.setItem('collaborators', JSON.stringify(data));
+      })
+    );
   }
 
   public updateColab(): Observable<any> {

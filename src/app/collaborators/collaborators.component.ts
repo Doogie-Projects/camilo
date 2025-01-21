@@ -25,6 +25,7 @@ export class CollaboratorsComponent {
   closeModal() {
     const modal = document.getElementById('modal');
     modal?.classList.add('hidden');
+    // window.location.reload()
   }
 
   saveCollaborator() {
@@ -50,6 +51,8 @@ export class CollaboratorsComponent {
       console.log('Collaborator updated:', response);
       this.closeModal();
       this.clearForm();
+      // window.location.reload()
+      // this.getAllColab();
     }, error => {
       console.error('Error updating collaborator:', error);
     });
@@ -65,8 +68,10 @@ export class CollaboratorsComponent {
     (document.getElementById('new-ssid') as HTMLInputElement).value = '';
   }
   
-  ngOnInit() : void{
-    this.getAllColab()
+  ngOnInit() {
+    this.apiService.getAllColab().subscribe((response: any[]) => {
+      this.data = response;
+    });
   }
 
   getAllColab() {
