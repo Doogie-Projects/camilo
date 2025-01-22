@@ -40,9 +40,6 @@ export class ApiService {
       tap((data) => {
         // Remove existing 'collaborators' information from localStorage
         localStorage.removeItem('collaborators');
-  
-        // Save the new data in localStorage
-        localStorage.setItem('collaborators', JSON.stringify(data));
       })
     );
   }

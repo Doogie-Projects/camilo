@@ -49,12 +49,17 @@ export class CollaboratorsComponent {
 
     this.apiService.createCollab(collaborator).subscribe(response => {
       console.log('Collaborator updated:', response);
+      this.loadCollaborators();
       this.closeModal();
       this.clearForm();
-      // window.location.reload()
-      // this.getAllColab();
     }, error => {
       console.error('Error updating collaborator:', error);
+    });
+  }
+
+  loadCollaborators() {
+    this.apiService.getAllColab().subscribe((response: any[]) => {
+      this.data = response;
     });
   }
 
