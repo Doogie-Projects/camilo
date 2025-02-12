@@ -1,101 +1,108 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort, MatSortModule} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { ApiService } from '../service/api.service';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
+interface UserData {
+  date: string;
+  time: string;
+  email: string;
+  location: string;
 }
 
-/** Constants used to fill up our data base. */
-const FRUITS: string[] = [
-  'blueberry',
-  'lychee',
-  'kiwi',
-  'mango',
-  'peach',
-  'lime',
-  'pomegranate',
-  'pineapple',
-];
-const NAMES: string[] = [
-  'Maia',
-  'Asher',
-  'Olivia',
-  'Atticus',
-  'Amelia',
-  'Jack',
-  'Charlotte',
-  'Theodore',
-  'Isla',
-  'Oliver',
-  'Isabella',
-  'Jasper',
-  'Cora',
-  'Levi',
-  'Violet',
-  'Arthur',
-  'Mia',
-  'Thomas',
-  'Elizabeth',
-];
+interface HistoryEntry {
+  address: string;
+  date_time: string;
+  lat?: string;
+  lon?: string;
+}
 
-/**
- * @title Data table with sorting, pagination, and filtering.
- */
+interface CheckInData {
+  email: string;
+  history?: HistoryEntry[];
+}
+
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
   styleUrls: ['./records.component.css'],
-  // imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule],
 })
 export class RecordsComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['date', 'time', 'email', 'location'];
+  dataSource1: MatTableDataSource<UserData>;
+  dataSource2: MatTableDataSource<UserData>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('paginator1') paginator1!: MatPaginator;
+  @ViewChild('paginator2') paginator2!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  dataCheckIn: UserData[] = [];
 
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(private router: Router, private apiService: ApiService) {
+    this.dataSource1 = new MatTableDataSource<UserData>(this.dataCheckIn);
+    this.dataSource2 = new MatTableDataSource<UserData>(this.dataCheckIn);
+
+    // Load records from the API
+    this.loadRecords1();
+    this.loadRecords2();
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource1.paginator = this.paginator1;
+    this.dataSource1.sort = this.sort;
+    this.dataSource2.paginator = this.paginator2;
+    this.dataSource2.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+  applyFilter1(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource1.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.dataSource1.paginator) {
+      this.dataSource1.paginator.firstPage();
     }
   }
-}
 
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-    ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-    '.';
+  loadRecords1() {
+    this.apiService.getAllCheckOut().subscribe((checkInData: CheckInData[]) => {
+      console.log(checkInData);
+      this.dataCheckIn = checkInData.flatMap((item, index) =>
+        (item.history || []).map((entry, historyIndex) => ({
+          date: new Date(entry.date_time).toISOString().split('T')[0],
+          time: new Date(entry.date_time).toISOString().split('T')[1].slice(0, 8),
+          email: item.email,
+          location: entry.address,
+        }))
+      );
+      this.dataSource1.data = this.dataCheckIn;
+      console.log(this.dataCheckIn);
+    });
+  }
 
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-  };
+  applyFilter2(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource2.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource2.paginator) {
+      this.dataSource2.paginator.firstPage();
+    }
+  }
+
+  loadRecords2() {
+    this.apiService.getAllCheckIn().subscribe((checkInData: CheckInData[]) => {
+      console.log(checkInData);
+      this.dataCheckIn = checkInData.flatMap((item, index) =>
+        (item.history || []).map((entry, historyIndex) => ({
+          date: new Date(entry.date_time).toISOString().split('T')[0],
+          time: new Date(entry.date_time).toISOString().split('T')[1].slice(0, 8),
+          email: item.email,
+          location: entry.address,
+        }))
+      );
+      this.dataSource2.data = this.dataCheckIn;
+      console.log(this.dataCheckIn);
+    });
+  }
 }

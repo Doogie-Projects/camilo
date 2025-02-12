@@ -7,9 +7,11 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ApiService {
   private url = environment.apiUrl;
   private apiKey = environment.apiKey;
+  private urlCheck = environment.apiUrlCheck;
 
   constructor(private http: HttpClient) {}
 
@@ -66,4 +68,39 @@ export class ApiService {
         })
       );
   }
+
+  public getAllCheckIn (): Observable<any> {
+
+    localStorage.removeItem('checkin');
+
+    const cachedData = localStorage.getItem('checkin');
+    if (cachedData) {
+      return of(JSON.parse(cachedData));
+    }
+
+    const headers = new HttpHeaders().set('x-api-key', this.apiKey);
+    return this.http.get<any>(`${this.urlCheck}check-in/get-all`, { headers }).pipe(
+      tap((data) => {
+        localStorage.setItem('checkin', JSON.stringify(data));
+      })
+    );
+  }
+
+  public getAllCheckOut (): Observable<any> {
+
+    localStorage.removeItem('checkout');
+
+    const cachedData = localStorage.getItem('checkout');
+    if (cachedData) {
+      return of(JSON.parse(cachedData));
+    }
+
+    const headers = new HttpHeaders().set('x-api-key', this.apiKey);
+    return this.http.get<any>(`${this.urlCheck}check-out/get-all`, { headers }).pipe(
+      tap((data) => {
+        localStorage.setItem('checkout', JSON.stringify(data));
+      })
+    );
+  }
+
 }
