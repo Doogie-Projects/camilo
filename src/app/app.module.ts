@@ -17,6 +17,7 @@ import { CollaboratorCardComponent } from './collaborator-card/collaborator-card
 import { ApiService } from './service/api.service';
 import { CollaboratorDetailComponent } from './collaborator-detail/collaborator-detail.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     RecordsComponent,
     CollaboratorsComponent,
     CollaboratorCardComponent,
-    CollaboratorDetailComponent
+    CollaboratorDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
