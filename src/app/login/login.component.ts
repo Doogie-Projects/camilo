@@ -13,9 +13,9 @@ export class LoginComponent {
   constructor(private router: Router) {}
 
   onSubmit() {
-    // Aquí puedes agregar la lógica de autenticación
-    if (this.email === 'admin@example.com' && this.password === 'password') {
-      // Redirigir al usuario a la página principal después de iniciar sesión
+    
+    if (this.email === 'camilo.barrera@gmail.com' && this.password === 'passwordcamilo') {
+    
       this.router.navigate(['/']);
     } else {
       alert('Credenciales incorrectas');
