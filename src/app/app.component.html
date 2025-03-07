@@ -3,7 +3,7 @@
     <div class="text-white text-lg font-semibold">
       Bienvenido
     </div>
-    <div class="hidden md:flex space-x-4">
+    <div class="hidden md:flex space-x-4" *ngIf="showNavItems">
       <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
         routerLink="records">Registros</a>
       <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -20,7 +20,7 @@
       </button>
     </div>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden">
+  <div id="mobile-menu" class="hidden md:hidden" *ngIf="showNavItems">
     <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end"
       routerLink="records">Registros</a>
     <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end"
