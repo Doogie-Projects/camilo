@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private router: Router) {}
 
   login(email: string, password: string): boolean {
-    if (email === 'admin@example.com' && password === 'password') {
+    if (email === 'camilo.barrera@gmail.com' && password === 'passwordcamilo') {
       this.isAuthenticated = true;
       localStorage.setItem('isAuthenticated', 'true');
       this.router.navigate(['/']);
