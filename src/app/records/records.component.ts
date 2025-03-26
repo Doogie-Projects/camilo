@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -29,12 +29,18 @@ interface CheckInData {
   templateUrl: './records.component.html',
   styleUrls: ['./records.component.css'],
 })
-export class RecordsComponent implements AfterViewInit {
+export class RecordsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['date', 'time', 'email', 'location'];
   dataSource1: MatTableDataSource<UserData>;
   dataSource2: MatTableDataSource<UserData>;
+  dataSource11: any[] = [];
+
+  filteredData: any[] = [];
+  pageSize = 5;
+  pageIndex = 0;
 
   @ViewChild('paginator1') paginator1!: MatPaginator;
+  @ViewChild('paginator11') paginator11!: MatPaginator;
   @ViewChild('paginator2') paginator2!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -43,10 +49,17 @@ export class RecordsComponent implements AfterViewInit {
   constructor(private router: Router, private apiService: ApiService) {
     this.dataSource1 = new MatTableDataSource<UserData>(this.dataCheckIn);
     this.dataSource2 = new MatTableDataSource<UserData>(this.dataCheckIn);
+    this.dataSource11 = this.dataCheckIn
+    
 
-    // Load records from the API
+
+
     this.loadRecords1();
     this.loadRecords2();
+  }
+
+  ngOnInit(): void {
+    this.updatePagination();
   }
 
   ngAfterViewInit() {
@@ -57,12 +70,13 @@ export class RecordsComponent implements AfterViewInit {
   }
 
   applyFilter1(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource1.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource1.paginator) {
-      this.dataSource1.paginator.firstPage();
-    }
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource11 = this.dataSource11.filter(item =>
+      item.email.toLowerCase().includes(filterValue) ||
+      item.date.includes(filterValue)
+    );
+    this.pageIndex = 0; // Resetando a página após o filtro
+    this.updatePagination();
   }
 
   loadRecords1() {
@@ -77,6 +91,7 @@ export class RecordsComponent implements AfterViewInit {
         }))
       );
       this.dataSource1.data = this.dataCheckIn;
+      this.dataSource11 = this.dataCheckIn;
       console.log(this.dataCheckIn);
     });
   }
@@ -104,5 +119,11 @@ export class RecordsComponent implements AfterViewInit {
       this.dataSource2.data = this.dataCheckIn;
       console.log(this.dataCheckIn);
     });
+  }
+
+  updatePagination(){
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageIndex;
+    this.filteredData = this.dataSource11.slice(startIndex, endIndex)
   }
 }

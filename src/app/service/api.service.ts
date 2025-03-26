@@ -2,16 +2,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class ApiService {
-  private url = environment.apiUrl;
-  private apiKey = environment.apiKey;
-  private urlCheck = environment.apiUrlCheck;
+  private url = "https://aconocutgf.execute-api.us-east-1.amazonaws.com/v1/";
+  private apiKey = 'MN70HmszY51RXTqUpXnRz3812ZLfhxtE8N0LPPg4';
+  private urlCheck = 'https://dwehzpy4zg.execute-api.us-east-1.amazonaws.com/v1/';
 
   constructor(private http: HttpClient) {}
 
