@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { LoadingService } from './service/loading.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +12,13 @@ import { Router, NavigationEnd } from '@angular/router';
 export class AppComponent {
   title = 'FE-Camilo';
   showNavItems = true;
+  loading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private _loading: LoadingService
+  ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.showNavItems = event.url !== '/login';
@@ -26,9 +33,19 @@ export class AppComponent {
     menuButton?.addEventListener('click', () => {
       mobileMenu?.classList.toggle('hidden');
     });
+
+    this.listenToLoading();
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  listenToLoading(): void {
+    this._loading.loadingSub
+      .pipe(delay(0))
+      .subscribe((loading) => {
+        this.loading = loading;
+      });
   }
 }
