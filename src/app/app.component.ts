@@ -13,6 +13,7 @@ export class AppComponent {
   title = 'FE-Camilo';
   showNavItems = true;
   loading: boolean = false;
+  isMobileMenuOpen: boolean = false;
 
   constructor(
     private authService: AuthService, 
@@ -35,6 +36,10 @@ export class AppComponent {
     });
 
     this.listenToLoading();
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
   logout() {
