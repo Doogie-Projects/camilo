@@ -30,11 +30,11 @@
     </div>
   </div>
   <div id="mobile-menu" class="hidden md:hidden" [class.hidden]="!isMobileMenuOpen" *ngIf="showNavItems">
-    <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end"
+    <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end"
       routerLink="records">Registros</a>
-    <a class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end"
+    <a class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end"
       routerLink="collaborators">Colaboradores</a>
-    <button (click)="logout()" class="block text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end">
+    <button (click)="logout()" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium flex justify-end">
       Cerrar Sesión
     </button>
   </div>
